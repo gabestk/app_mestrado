@@ -239,7 +239,7 @@ Este projeto não possui um arquivo de licença definido. Recomenda-se adicionar
 ```
 MIT License
 
-Copyright (c) [Ano] [Nome Completo do Proprietário do Repositório]
+Copyright (c) [2025] [Gabriel Trajano de Almeida]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -259,13 +259,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-Substitua `[Ano]` e `[Nome Completo do Proprietário do Repositório]` pelas informações corretas.
 
 ## 📧 Contato
 
 Para dúvidas ou informações sobre o projeto, entre em contato com o desenvolvedor principal:
--   Nome: (Nome do Desenvolvedor Principal - verificar `pubspec.yaml` ou commits)
--   Email: (Email do Desenvolvedor - verificar `pubspec.yaml` ou commits)
+-   Nome: (Gabriel Trajano de Almeida - verificar `pubspec.yaml` ou commits)
+-   Email: (gabriel.trajano97@hotmail.com - verificar `pubspec.yaml` ou commits)
 -   GitHub: [gabestk](https://github.com/gabestk) (Baseado na URL do clone no README original)
 
 ```
