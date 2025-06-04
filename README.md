@@ -1,18 +1,60 @@
-A implementação dos aplicativo mobile, utiliza o framework Flutter, que por sua vez utiliza a linguagem de programação Dart, a qual é orientada a objetos, baseada em classes e possui uma sintaxe similar à linguagem C. Inicialmente, o aplicativo foi concebido para coletar exclusivamente informações da interface OBD e armazená-las em um banco de dados Firebase. Firebase é um conjunto de serviços de back-end de computação em nuvem e plataformas de desenvolvimento de aplicativos fornecidos pelo Google. Dart, Flutter e Firebase foram desenvolvidos pela empresa Google LLC. Entretanto, o Firebase apresentou algumas limitações em termos de quantidade de leitura e escrita de informações.
+Aplicativo de Monitoramento Veicular
+Este projeto é um aplicativo mobile desenvolvido como parte de um trabalho de mestrado. Utiliza o framework Flutter e a linguagem Dart para coletar dados da interface OBD (On-Board Diagnostics) de veículos e armazená-los no Firebase, uma plataforma de serviços em nuvem fornecida pelo Google.
 
-Os testes iniciais revelaram que, para um volume significativo de informações, o experimento poderia ser prejudicado, pois quando o limite de operações permitidas é atingido, o banco de dados bloqueia as operações, as quais só podem ser recuperadas após um determinado período de tempo. Como a plataforma blockchain ainda está em desenvolvimento, foi decidido utilizar bibliotecas e plugins que auxiliem no armazenamento de dados internos do aplicativo. Inicialmente, realizamos a modelagem dos dados que serão recebidos. 
+🚀 Tecnologias Utilizadas
+Flutter: Framework de desenvolvimento de aplicativos multiplataforma.
 
-A Figura 1 ilustra a divisão dos casos de uso. A primeira etapa para capturar os dados veiculares envolve a conexão com o OBD é um dispositivo móvel via Bluetooth. Inicialmente, o condutor precisa conectar o scanner à interface do veículo e ligar o veículo para estabelecer a conexão e adquirir as informações necessárias. A segunda ação que um condutor pode realizar é visualizar os dados capturados pela aplicação em seu dispositivo. Para o armazenamento de dados, foi inicialmente utilizado um banco de dados chamado HiveDB, onde todos os dados são organizados em "caixas". Uma caixa pode ser comparada a uma tabela em SQL, mas não possui uma estrutura rígida e pode conter qualquer tipo de dado.
-
-A terceira ação consiste em simular aleatoriamente os comandos que o OBD pode enviar, seguindo as normas estabelecidas para a quantidade mínima e máxima de comandos que o OBD pode transmitir. A quarta ação envolve a recuperação das informações armazenadas, inicialmente utilizando o formato JavaScript Object Notation (JSON). O JSON é um formato de arquivo de padrão aberto utilizado para armazenar e transmitir objetos de dados que consistem em pares de atributo-valor e matrizes. Esses arquivos são salvos na pasta do projeto e podem ser acessados pelo desenvolvedor que deseja recuperar as rotas geradas pelo aplicativo
+Dart: Linguagem de programação orientada a objetos, baseada em classes.
 
 
-Figura 1: Ações do usuário no sistema Mobile
+📂 Estrutura do Projeto
+O projeto possui a seguinte estrutura de diretórios:
 
-![condutor](condutor.png)
+android/: Configurações específicas para a plataforma Android.
 
-A Figura 2 representa a interação do condutor com o aplicativo. O processo começa quando o condutor solicita que o aplicativo inicie o experimento. Neste momento, o aplicativo  inicia uma solicitação de conexão Bluetooth com o scanner OBD. O scanner, por sua vez, solicita as informações à interface OBD do veículo, que envia esses dados ao aplicativo através do scanner
+ios/: Configurações específicas para a plataforma iOS.
 
-Figura 2: Ações do usuário no sistema aplicativo mobile
+lib/: Código-fonte principal do aplicativo.
 
-![fluxo](fluxodeintera%C3%A7%C3%A3o.png)
+
+Além disso, o repositório inclui arquivos de configuração como .gitignore, pubspec.yaml, e imagens ilustrativas (condutor.png, fluxodeinteração.png).
+
+🛠️ Configuração e Execução
+Para executar o aplicativo localmente, siga os passos abaixo:
+
+Pré-requisitos:
+
+Instale o Flutter em sua máquina.
+
+Configure um emulador ou conecte um dispositivo físico.
+
+Clonar o Repositório:
+
+bash
+Copiar
+Editar
+git clone https://github.com/gabestk/app_mestrado.git
+cd app_mestrado
+Instalar Dependências:
+
+bash
+Copiar
+Editar
+flutter pub get
+Executar o Aplicativo:
+
+bash
+Copiar
+Editar
+flutter run
+📸 Ilustrações
+O repositório contém imagens que ilustram o fluxo de interação do aplicativo e a interface do condutor:
+
+fluxodeinteração.png: Diagrama do fluxo de interação do usuário com o aplicativo.
+
+condutor.png: Interface gráfica apresentada ao condutor.
+
+📄 Licença
+Este projeto está licenciado sob a Licença MIT.
+
+Se você tiver mais informações específicas sobre o projeto ou desejar adicionar detalhes adicionais, como funcionalidades específicas, contribuições ou contato, sinta-se à vontade para personalizar este README conforme necessário.
