@@ -1,6 +1,6 @@
 # 📱 Aplicativo de Monitoramento Veicular (obdapp)
 
-Este repositório contém o `obdapp`, um aplicativo desenvolvido em Flutter como parte de um projeto de mestrado. O objetivo principal do aplicativo é coletar dados veiculares em tempo real através da interface OBD-II, processá-los e enviá-los para uma plataforma em nuvem (Firebase) para análise e rastreamento do comportamento veicular.
+Este repositório contém o `Fuel Sentinel`, um aplicativo desenvolvido em Flutter como parte de um projeto de mestrado. O objetivo principal do aplicativo é coletar dados veiculares em tempo real através da interface OBD-II, processá-los e enviá-los para uma plataforma em nuvem (Firebase) para análise e rastreamento do comportamento veicular.
 
 ## 📑 Índice
 
@@ -24,7 +24,7 @@ Este repositório contém o `obdapp`, um aplicativo desenvolvido em Flutter como
 
 ## 🔭 Visão Geral
 
-O `obdapp` permite a conexão com adaptadores OBD-II via Bluetooth para ler diversos parâmetros do veículo. Os dados coletados são armazenados localmente utilizando Hive e, quando disponível, sincronizados com o Cloud Firestore (Firebase). O aplicativo também captura dados de sensores do dispositivo móvel e informações de GPS, enriquecendo a análise do comportamento de condução. Uma funcionalidade adicional permite o registro fotográfico de bombas de combustível, potencialmente para controle de abastecimento.
+O `Fuel Sentinel` permite a conexão com adaptadores OBD-II via Bluetooth para ler diversos parâmetros do veículo. Os dados coletados são armazenados localmente utilizando Hive e, quando disponível, sincronizados com o Cloud Firestore (Firebase). O aplicativo também captura dados de sensores do dispositivo móvel e informações de GPS, enriquecendo a análise do comportamento de condução. Uma funcionalidade adicional permite o registro fotográfico de bombas de combustível, potencialmente para controle de abastecimento.
 
 ## ✨ Funcionalidades Principais
 
@@ -62,21 +62,15 @@ O `obdapp` permite a conexão com adaptadores OBD-II via Bluetooth para ler dive
 
 -   **Flutter:** Framework UI para desenvolvimento de aplicações nativas multiplataforma.
 -   **Dart:** Linguagem de programação utilizada pelo Flutter.
--   **Firebase:**
-    -   **Cloud Firestore:** Banco de dados NoSQL na nuvem para armazenamento dos dados coletados.
-    -   **Firebase Core:** Para inicialização dos serviços Firebase.
-    -   (Potencialmente Firebase Storage para imagens e Firebase Authentication).
 -   **Hive:** Banco de dados NoSQL leve e rápido para armazenamento local no dispositivo.
 -   **flutter_bluetooth_serial:** Para comunicação Bluetooth com adaptadores OBD-II.
 -   **geolocator:** Para obter coordenadas GPS.
 -   **sensors_plus:** Para acesso a sensores do dispositivo (acelerômetro, giroscópio).
 -   **auto_route:** Para gerenciamento de rotas e navegação.
--   **syncfusion_flutter_charts:** Para exibição de gráficos.
 -   **workmanager:** Para execução de tarefas em segundo plano.
 -   **image_picker:** Para seleção de imagens da galeria ou captura pela câmera.
 -   **path_provider:** Para encontrar caminhos de sistema de arquivos no dispositivo.
 -   **permission_handler:** Para solicitar e verificar permissões em tempo de execução.
--   **Outras dependências importantes:** `http`, `mqtt_client` (sugere potencial comunicação MQTT), `uuid`.
 
 ## ⚙️ Arquitetura do Sistema
 
@@ -90,13 +84,9 @@ O fluxo de dados geral do aplicativo pode ser descrito como:
 2.  **Armazenamento Local:**
     *   Os dados coletados são primeiramente armazenados em um banco de dados local Hive. Isso garante que os dados não sejam perdidos em caso de falta de conectividade.
 3.  **Sincronização com a Nuvem:**
-    *   Quando há conexão com a internet, os dados armazenados localmente são enviados para o Cloud Firestore (Firebase).
-    *   (Se aplicável, fotos podem ser enviadas para o Firebase Storage ou outro serviço AWS).
+    *   Quando há conexão com a internet, os dados armazenados localmente são enviados para o Amazon Timestream.
 4.  **Visualização e Interação:**
-    *   O usuário pode visualizar dados em tempo real, histórico de viagens, mapas e gráficos através da interface do aplicativo.
-
-*Imagem representando o fluxo de interação (fluxodeinteração.png):*
-![Fluxo de Interação](fluxodeinteração.png)
+    *   Visualização em tempo real dos dados via Amazon Grafana
 
 ## 🔧 Pré-requisitos
 
@@ -127,23 +117,7 @@ flutter pub get
 
 Este comando irá baixar todas as dependências listadas no arquivo `pubspec.yaml`.
 
-### 3. Configurar o Firebase
-
-Este projeto utiliza Firebase. Você precisará configurar um projeto Firebase e conectá-lo ao aplicativo:
-
-1.  **Crie um Projeto Firebase:** Acesse o [Console do Firebase](https://console.firebase.google.com/) e crie um novo projeto.
-2.  **Adicione o Flutter ao seu projeto Firebase:**
-    *   Siga as instruções oficiais do Firebase para adicionar um aplicativo Flutter ([FlutterFire Overview](https://firebase.flutter.dev/docs/overview/)).
-    *   Isso geralmente envolve registrar seu aplicativo (Android e/ou iOS) no projeto Firebase.
-    *   **Para Android:** Você precisará adicionar o `google-services.json` baixado do Firebase na pasta `android/app/`.
-    *   **Para iOS:** Você precisará adicionar o `GoogleService-Info.plist` baixado do Firebase na pasta `ios/Runner/` através do Xcode.
-    *   Certifique-se que o arquivo `lib/functions/firebaseOptions.dart` está configurado corretamente, o que geralmente é feito automaticamente pela CLI do FlutterFire (`flutterfire configure`).
-3.  **Configure os Serviços Firebase:**
-    *   **Firestore:** Habilite o Cloud Firestore no seu projeto Firebase. Defina as regras de segurança apropriadas para o seu caso de uso. O código em `lib/functions/repository.dart` interage com uma coleção chamada `dataPoints`.
-    *   **Firebase Storage (Opcional, se usado para fotos):** Se o aplicativo armazena fotos no Firebase, habilite o Firebase Storage e configure suas regras de segurança.
-    *   **Firebase Authentication (Opcional):** Se o aplicativo usar autenticação Firebase, configure os provedores de login desejados.
-
-### 4. Permissões
+### 3. Permissões
 
 O aplicativo requer as seguintes permissões, que são solicitadas em tempo de execução (`permission_handler`):
 
@@ -260,11 +234,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-## 📧 Contato
+## 📧 Contato e Informações extras
 
 Para dúvidas ou informações sobre o projeto, entre em contato com o desenvolvedor principal:
 -   Nome: (Gabriel Trajano de Almeida - verificar `pubspec.yaml` ou commits)
 -   Email: (gabriel.trajano97@hotmail.com - verificar `pubspec.yaml` ou commits)
 -   GitHub: [gabestk](https://github.com/gabestk) (Baseado na URL do clone no README original)
 
+Este projeto contou com recursos do Conselho Nacional de Desenvolvimento
+Científico e Tecnológico (CNPq) que financiou parte desta pesquisa, por meio do projeto
+Conecta2AI (Processo nº 405531/2022-2).
+O projeto contou também com recursos da FAPERJ, processo E-26/290.124/2021 -
+Projeto MobiCrowd; e com apoio do Pronametro.
 ```
