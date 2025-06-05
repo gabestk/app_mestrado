@@ -1,4 +1,4 @@
-# 📱 Aplicativo de Monitoramento Veicular (obdapp)
+# 📱 Aplicativo de Monitoramento Veicular (Fuel Sentinel)
 
 Este repositório contém o `Fuel Sentinel`, um aplicativo desenvolvido em Flutter como parte de um projeto de mestrado. O objetivo principal do aplicativo é coletar dados veiculares em tempo real através da interface OBD-II, processá-los e enviá-los para uma plataforma em nuvem (Firebase) para análise e rastreamento do comportamento veicular.
 
